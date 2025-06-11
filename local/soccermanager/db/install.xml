@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMLDB PATH="local/soccermanager/db" VERSION="20240611"
+    COMMENT="XMLDB file for Moodle local/soccermanager plugin">
+    <TABLES>
+        <TABLE NAME="soccermanager_assignments"
+            COMMENT="Stores soccer team assignments for students">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" />
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="position" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="jerseynumber" TYPE="int" LENGTH="3" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course"
+                    REFFIELDS="id" />
+                <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id" />
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="course_jersey_unique" UNIQUE="true" FIELDS="courseid, jerseynumber" />
+                <INDEX NAME="course_user_unique" UNIQUE="true" FIELDS="courseid, userid" />
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>
